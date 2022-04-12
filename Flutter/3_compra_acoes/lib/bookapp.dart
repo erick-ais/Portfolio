@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class BookApp extends StatefulWidget {
@@ -11,6 +9,7 @@ class BookApp extends StatefulWidget {
 
 class _BookAppState extends State<BookApp> {
   int quantidade = 0;
+  double resultado = 10;
   final TextEditingController valorController = TextEditingController();
 
   void adicionar() {
@@ -25,8 +24,11 @@ class _BookAppState extends State<BookApp> {
     });
   }
 
-  void valortotal() {
-    Double doubleValor = double.parse(valorController);
+  void calcular() {
+    setState(() {
+      double total = double.parse(valorController.text);
+      resultado = total * quantidade;
+    });
   }
 
   @override
@@ -85,14 +87,15 @@ class _BookAppState extends State<BookApp> {
               fontSize: 16,
             ),
           ),
+          // QUANTIDADE DE AÇÕES.............................................
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 80),
+            padding: const EdgeInsets.symmetric(horizontal: 80),
             child: TextField(
               textAlign: TextAlign.center,
               controller: valorController,
               decoration: const InputDecoration(
-                hintText: '0,00',
                 prefixText: 'R\$',
+                hintText: '0,00',
               ),
               keyboardType: TextInputType.number,
               style: const TextStyle(
@@ -103,11 +106,12 @@ class _BookAppState extends State<BookApp> {
           const SizedBox(
             height: 32,
           ),
+          // TOTAL........................................................
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('$quantidade Ações'),
-              Text('R\$ $valortotal()'),
+              Text('$resultado'),
             ],
           ),
           Row(
@@ -121,7 +125,7 @@ class _BookAppState extends State<BookApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Taxa B3'),
-              Text('R\R 1,26'),
+              Text('R\$ 1,26'),
             ],
           ),
           SizedBox(
@@ -129,10 +133,16 @@ class _BookAppState extends State<BookApp> {
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Comprar'),
+            child: Text(
+              'Comprar',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.black,
+              primary: Colors.purple,
+              onPrimary: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 14),
             ),
           ),
         ],
