@@ -9,7 +9,7 @@ class BookApp extends StatefulWidget {
 
 class _BookAppState extends State<BookApp> {
   int quantidade = 0;
-  double resultado = 10;
+  double compra = 0.0;
   final TextEditingController valorController = TextEditingController();
 
   void adicionar() {
@@ -27,7 +27,10 @@ class _BookAppState extends State<BookApp> {
   void calcular() {
     setState(() {
       double total = double.parse(valorController.text);
-      resultado = total * quantidade;
+      double resultado = total * quantidade;
+      if (resultado > 0) {
+        compra = resultado;
+      }
     });
   }
 
@@ -111,7 +114,7 @@ class _BookAppState extends State<BookApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('$quantidade Ações'),
-              Text('$resultado'),
+              Text('$compra'),
             ],
           ),
           Row(
